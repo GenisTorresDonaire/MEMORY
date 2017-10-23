@@ -12,7 +12,7 @@
         <div class="contenedor">
             
             <header>
-               
+               <h1>Memory</h1>
             </header>
             
             <article>
@@ -62,7 +62,7 @@
                         }
                     
                 ?>
-               
+           
             </article>
             
             <footer>

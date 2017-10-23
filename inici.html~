@@ -10,11 +10,14 @@
 	
 	<body>
         <div class="contenedor">
+            
             <header>
-                
+               <h1>Memory</h1>
             </header>
+            
             <article>
                <div class="divInicio">
+                   <h1 style="text-align: center;">Bienvenido al TEXAS MEMORY</h1>
                    <br>
                    <h3>Mecánica del juego</h3>
                    <br>

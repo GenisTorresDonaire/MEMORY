@@ -1,7 +1,22 @@
 var IdCartas = [];
 var CartasComparar = [];
 var parejasEncontradas = 0;
-var totalParejas = 3; 
+var totalParejas; 
+var contador;
+var cronometro;
+
+function quitarStyle(id){
+    document.getElementById("carta"+id+"").removeAttribute("style");
+}
+
+function ejecutarSubmit(){
+    var form = document.getElementById("formularioOculto");
+    form.submit();
+}
+
+function saberTotalParejas(parejas){
+    totalParejas = parejas;
+}
 
 function bloquearCartas(id){
     document.getElementById("carta"+id+"").removeAttribute("onclick");
@@ -11,6 +26,7 @@ function contadorTurnos(){
     var contador= document.getElementById("contador").innerHTML;
     contador++;
     document.getElementById("contador").innerHTML = contador;
+    document.getElementById("intentosOcultos").setAttribute("value",contador);
 }
 
 function ponerDeFrente(id){
@@ -21,13 +37,58 @@ function ponerDeFrente(id){
 function ponerDelReves(id){ 
     var elementodiv = document.getElementById("carta"+id+"");
     elementodiv.className = "carta";
+    //quitarStyle(id);
 }
 
-function irAlRanking(){
-   window.open("../ranking/introducirDatosUsuario.html", "_self", "", true)
+function sonidoAcierto(){
+    var acierto = document.getElementById("acierto");
+    acierto.play();
 }
 
-function empezar(id){
+function sonidoFallo(){
+    var fallo = document.getElementById("fallo");
+    fallo.play();
+}
+
+function pausa(){
+
+}
+
+function ayuda(totalCartas){
+    // FOR PARA RECORRER TODAS LAS CARTAS EN BUSCA DE LAS DEL REVES PARA MOSTRAR
+    for (var idC = 0; idC < totalCartas; idC++){
+        var classeCarta = document.getElementById("carta"+idC).className;
+        
+        // SI AUN NO ESTABA GIRADA ...
+        if ( classeCarta == "carta"){
+            ponerDeFrente(idC);
+        }
+    }
+
+    // FUNCION DE DAR LA VUELTA CON RETRASO, PARA DAR TIEMPO A VERLAS.
+    setTimeout(function(){
+        for (var idC = 0; idC < totalCartas; idC++){
+            var cartasQueMostrar = document.getElementById("carta"+idC).getAttribute("onclick");
+            if ( cartasQueMostrar != null ){
+                ponerDelReves(idC);
+            }
+        }
+    },2000)
+
+    // AUGMENTAR CONTADOR +5
+    contadorTurnos();
+    contadorTurnos();
+    contadorTurnos();
+    contadorTurnos();
+    contadorTurnos();
+
+    // REINCIO LAS ARRAYS DONDE GUARDO LAS SELECCIONADAS PARA QUE NO ALMACENE NADA UNA VEZ HAYA MOSTRADO TODAS
+    CartasComparar = [];
+    IdCartas = [];
+}
+
+function empezar(id,parejas){
+    saberTotalParejas(parejas);
     
     // Capturar el tipo de clase de la carta seleccionada. Es decir si ha sido girada o no.
     var claseCartaSeleccionada = document.getElementById("carta"+id).className;
@@ -52,22 +113,39 @@ function empezar(id){
             
             // Si la pareja es igual...
 			if(CartasComparar[0] == CartasComparar[1]){
-                parejasEncontradas++;
-                
-                // Ahora toca bloquear la pareja encontrada.
+                parejasEncontradas++;                
                 var carta1 = IdCartas[0];
-                var carta2 = IdCartas[1];  
+                var carta2 = IdCartas[1];
+                
+                // CONFIGURACION DEL MARCO VERDE AL SER PAREJAS
+                document.getElementById("carta"+carta1+"").childNodes[1].childNodes[0].setAttribute("style","border: 2px solid green;");
+                document.getElementById("carta"+carta2+"").childNodes[1].childNodes[0].setAttribute("style","border: 2px solid green;");
+                sonidoAcierto();
+                
+                // Quitando Marcos una vez mostradas.
+                setTimeout(function(){
+                    document.getElementById("carta"+carta1+"").childNodes[1].childNodes[0].removeAttribute("style");
+                }, 2000);
+                
+                setTimeout(function(){
+                    document.getElementById("carta"+carta2+"").childNodes[1].childNodes[0].removeAttribute("style");
+                }, 2000);              
+                
+
+                // Ahora toca bloquear la pareja encontrada.
                 bloquearCartas(carta1);
                 bloquearCartas(carta2);
+                
                 
 				// Como ya se ha comparado toca reiniciar las arrays.
 				CartasComparar = [];
             	IdCartas = [];
-				
+                
                 // Hora de comparar si se han encontrado todas.
 				if(parejasEncontradas == totalParejas){
-					setTimeout(function(){irAlRanking();}, 2000);
+                    setTimeout(function(){ejecutarSubmit();}, 2000);
 				}
+                
 			}
             
             // Si no son iguales la pareja...
@@ -83,9 +161,26 @@ function empezar(id){
                 // Capturacion de las ids seleccionadas, y llamada a la funcion para volverlas del reves.
                 var carta1 = IdCartas[0];
                 var carta2 = IdCartas[1];   
-                setTimeout(function(){ponerDelReves(carta1);},2000);
-                setTimeout(function(){ponerDelReves(carta2);},2000);
                 
+                // Configuracion del marco
+                document.getElementById("carta"+carta1+"").childNodes[1].childNodes[0].setAttribute("style","border: 2px solid red;");
+                document.getElementById("carta"+carta2+"").childNodes[1].childNodes[0].setAttribute("style","border: 2px solid red;");
+                
+                // Aplicando el sonido
+                sonidoFallo();
+
+                // Quitando El Marco
+                setTimeout(function(){
+                    ponerDelReves(carta1);
+                    document.getElementById("carta"+carta1+"").childNodes[1].childNodes[0].removeAttribute("style")
+                },2000);
+
+                setTimeout(function(){
+                    ponerDelReves(carta2);
+                    document.getElementById("carta"+carta2+"").childNodes[1].childNodes[0].removeAttribute("style");
+                },2000);
+                                
+
                 // Llamamo a la funcion de limpiar arrays un segundo despues de girar las cartas.
                 setTimeout(reiniciarArrays,3000);
                 
