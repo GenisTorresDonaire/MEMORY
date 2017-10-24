@@ -21,7 +21,8 @@
 				
 				<?php
 					
-					$id = 0;                        
+					$id = 0;
+
 					$tablero = $_POST["seleccionTablero"];
 					if ($tablero == "2"){
 						$Filas = 2;
@@ -38,14 +39,24 @@
 					}									
    
 					//CREACION DE ARRAY CON NUMEROS REPETIDOS, SOLO 2
-					$lista = array();
+					$lista = new ArrayObject();	// El array ha sido modificado a ArrayObject para poder utilizar el getArrayCopy
 					$totalnum = ($Filas * $Columnas / 2);
-
+					
 					// GENERADOR DE NUMEROS PARES ALEATORIOS			
 					for ($x = 0; $x < $totalnum; $x++){
-						array_push($lista, $x);
-						array_push($lista, $x);
+						$lista->append($x);
+						$lista->append($x);
 					}
+
+					// MEZCLA DE NUMEROS ALEATORIOS 
+				    $lista->asort();
+				    
+				    // Comprovacion de si ya se ha guardado la primera vez, asi solo generara la copia inicial y no volvera a hacerla.
+				    if (isset($_SESSION['copia'])){}
+					else{
+						$copy = $lista->getArrayCopy();
+						$_SESSION['copia'] = $copy;
+				    }
 
 					$totalCartas = sizeof($lista);
 
@@ -58,13 +69,13 @@
                             echo "Tiempo: <span id='minutos'>00</span>:<span id='segundos'>00</span>";
                         echo "</div>";
                         echo "<div class='divBotonRanking'>";
-                            echo "<img id='ranking' src='../imagenes/botonRanking.png' onclick='window.open('../ranking/guardarDatosUsuario.php')'/>";
+                            echo "<img id='ranking' src='../imagenes/botonRanking.png'/>";
                         echo "</div>";
                         echo "<div class='divBotonAyuda'>";
                             echo "<img id='ayuda' src='../imagenes/botonAyuda.png' onclick='ayuda(".$totalCartas.")'/>";
                         echo "</div>";
                         echo "<div class='divBotonPausar'>";
-                            echo "<img id='pause' src='../imagenes/botonPausar.png' onclick='detenerse()'/>";
+                            echo "<img id='pause' src='../imagenes/botonPausar.png' onclick='pausar()'/>";
                         echo "</div>";
                     echo "</div>";
 										         
@@ -72,9 +83,6 @@
 					echo "<form action='../ranking/introducirDatosUsuario.php' id='formularioOculto' method='post'>";
 						echo "<input type='hidden' id='intentosOcultos' name='postIntentos' value='0' />";
 					echo "</form>";
-
-				    // MEZCLA DE NUMEROS ALEATORIOS 
-				    shuffle ($lista);
 
 					echo "<div class='divPausar'>";
 					echo "</div>";
