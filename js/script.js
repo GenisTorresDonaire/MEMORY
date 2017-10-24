@@ -40,6 +40,33 @@ function ponerDelReves(id){
     //quitarStyle(id);
 }
 
+function detenerse(){
+    clearInterval(cronometro);
+}
+
+function carga(){
+    contMin = 0;
+    contSeg = 0;
+    minutos = document.getElementById("minutos");
+    segundos = document.getElementById("segundos");
+
+    cronometro = setInterval(
+        function(){
+            if(contSeg == 60){
+                contSeg = 0;
+                contMin++;
+                minutos.innerHTML= contMin;
+
+                if( contMin == 0 ){
+                    contMin = 0;
+                } 
+            }
+            segundos.innerHTML = contSeg; 
+            contSeg++;
+        }
+        ,1000);  
+}
+
 function sonidoAcierto(){
     var acierto = document.getElementById("acierto");
     acierto.play();
