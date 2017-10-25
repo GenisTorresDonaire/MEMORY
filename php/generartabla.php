@@ -21,8 +21,8 @@
 				
 				<?php
 					
-					$id = 0;
-
+					$arrayClonada = array();
+					
 					$tablero = $_POST["seleccionTablero"];
 					if ($tablero == "2"){
 						$Filas = 2;
@@ -39,28 +39,26 @@
 					}									
    
 					//CREACION DE ARRAY CON NUMEROS REPETIDOS, SOLO 2
-					$lista = new ArrayObject();	// El array ha sido modificado a ArrayObject para poder utilizar el getArrayCopy
+					$lista = array();	// El array ha sido modificado a ArrayObject para poder utilizar el getArrayCopy
 					$totalnum = ($Filas * $Columnas / 2);
 					
-					// GENERADOR DE NUMEROS PARES ALEATORIOS			
-					for ($x = 0; $x < $totalnum; $x++){
-						$lista->append($x);
-						$lista->append($x);
-					}
+					$totalCartas = sizeof($_SESSION['partida']);
 
-					// MEZCLA DE NUMEROS ALEATORIOS 
-				    $lista->asort();
-				    
-				    // Comprovacion de si ya se ha guardado la primera vez, asi solo generara la copia inicial y no volvera a hacerla.
-				    if (isset($_SESSION['copia'])){}
-					else{
-						$copy = $lista->getArrayCopy();
-						$_SESSION['copia'] = $copy;
-				    }
+					//unset($_SESSION["partida"]);
 
-					$totalCartas = sizeof($lista);
+					// ESTE ISSET ES PARA COMPROBAR SI YA FUE CREADA LA PARTIDA, SINO GENERARA LA LISTA OTRA VEZ.
+					if(!isset($_SESSION['partida'])){
+						// GENERADOR DE NUMEROS PARES ALEATORIOS			
+						for ($x = 0; $x < $totalnum; $x++){
+							array_push($lista, $x);
+							array_push($lista, $x);
+						}
+						// MEZCLA DE NUMEROS ALEATORIOS
+						shuffle($lista);
+						$_SESSION['partida'] = $lista;
+					}		
 
-					 // CONTADOR
+					// CONTADOR
                     echo "<div class='contenedorMenu'>";
                         echo "<div class='divIntentos'>";
                             echo "Intentos: <label id='contador'>0</label>";
@@ -84,26 +82,23 @@
 						echo "<input type='hidden' id='intentosOcultos' name='postIntentos' value='0' />";
 					echo "</form>";
 
-					echo "<div class='divPausar'>";
-					echo "</div>";
-
 					echo "<div class='table'>";
-                
-					// CREACION DE TABLA
-					echo "<table class='tablarandom' >";
-					for ($i = 0; $i < $Filas; $i++){
-						echo "<tr>";
-						for ($u = 0;$u < $Columnas; $u++){
-							echo "<td>";
-							echo "<div id='carta".$id."' class='carta' onclick='empezar(".$id.",".$totalnum.")'>";
-								echo "<div class='lado frente'><img src='../imagenes/delReves.png'/></div>";
-								echo "<div class='lado atras'><img src='../imagenes/png".$lista[$id++].".png'/></div>";		
-							echo "</div>";
-							echo "</td>";								
+	               	 	$id = 0;				
+						// CREACION DE TABLA
+						echo "<table class='tablarandom' >";
+						for ($i = 0; $i < $Filas; $i++){
+							echo "<tr>";
+							for ($u = 0;$u < $Columnas; $u++){
+								echo "<td>";
+								echo "<div id='carta".$id."' class='carta' onclick='empezar(".$id.",".$totalnum.")'>";
+									echo "<div class='lado frente'><img src='../imagenes/delReves.png'/></div>";
+									echo "<div class='lado atras'><img src='../imagenes/png".$_SESSION['partida'][$id++].".png'/></div>";		
+								echo "</div>";
+								echo "</td>";								
+							}
+							echo "</tr>";
 						}
-						echo "</tr>";
-					}
-					echo "</table>";
+						echo "</table>";
 					echo "</div>";
 					
 				?>

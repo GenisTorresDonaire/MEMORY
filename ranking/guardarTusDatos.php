@@ -42,8 +42,8 @@
                     function printarTabla(){
                         
                         echo "<div class='divranking'>";
-                            echo "<table class='tableranking'>";
-                                    echo "<h1>RANKING MEMORY</h1>";
+                            echo "<table class='tablerankingGeneral'>";
+                                    echo "<h1>RANKING GENERAL</h1>";
                                     $file = fopen("datos.txt", "r");
                                     while(!feof($file)){ 
                                         echo "<tr>";
@@ -57,9 +57,26 @@
                                     }
                                     fclose($file);
                             echo "</table>";
-                        echo "</div>";
-                        
-                        }
+
+                        echo "<br>";
+                            
+                            echo "<table class='tablerankingPersonal'>";
+                                    echo "<h1>RANKING PERSONAL</h1>";
+                                    $file = fopen("datos.txt", "r");
+                                    while(!feof($file)){ 
+                                        echo "<tr>";
+                                            echo "<td>";
+                                                echo "".fgets($file)."";
+                                            echo "</td>";
+                                            echo "<td>";
+                                                echo "".fgets($file)."";
+                                            echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    fclose($file);
+                            echo "</table>";
+                        echo "</div>"; 
+                    }
                     
                 ?>
                

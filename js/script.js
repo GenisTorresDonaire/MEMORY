@@ -60,8 +60,8 @@ function detenerse(){
 function carga(){
     contMin = 0;
     contSeg = 0;
-    minutos = document.getElementById("minutos");
-    segundos = document.getElementById("segundos");
+    etiquetaMinutos = document.getElementById("minutos");
+    etiquetaSegundos = document.getElementById("segundos");
 
     cronometro = setInterval(
         function(){
@@ -69,25 +69,24 @@ function carga(){
                 contSeg = 0;
                 contMin++;
                 if ( contMin < 10 ){
-                    minutos.innerHTML= "0"+contMin;
+                    etiquetaMinutos.innerHTML= "0"+contMin;
                 }
                 else{
-                    minutos.innerHTML= contMin;
+                    etiquetaMinutos.innerHTML= contMin;
                 }
 
                 if( contMin == 0 ){
                     contMin = 0;
                 } 
             }
-            
+            contSeg++;
 
             if ( contSeg < 10 ){
-                segundos.innerHTML = "0"+contSeg; 
+                etiquetaSegundos.innerHTML = "0"+contSeg; 
             }
             else{
-                segundos.innerHTML = contSeg; 
+                etiquetaSegundos.innerHTML = contSeg; 
             }
-            contSeg++;
         }
         ,1000);  
 }
@@ -108,10 +107,12 @@ function ayuda(totalCartas){
     // FOR PARA RECORRER TODAS LAS CARTAS EN BUSCA DE LAS DEL REVES PARA MOSTRAR
     if (contadorAyudasPedidas < 3 ){
         contadorAyudasPedidas++;
+        
+        alert(totalCartas);
 
         for (var idC = 0; idC < totalCartas; idC++){
             var classeCarta = document.getElementById("carta"+idC).className;
-        
+            alert(classeCarta);
             // SI AUN NO ESTABA GIRADA ...
             if ( classeCarta == "carta"){
                 ponerDeFrente(idC);
