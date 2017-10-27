@@ -99,21 +99,23 @@
                                     echo "</td>";
                                 echo "</tr>";
 
-                        print(sizeof($arrayPersonal));
+                                $maixmo = sizeof($_SESSION["arrayPersonal"]);
 
-                        for ( $x = 0; $x < count($arrayPersonal); $x++) {
-                            echo "<tr>";
-                                echo "<td>";
-                                    echo $arrayPersonal[$x][0];
-                                echo "</td>";
-                                echo "<td>";
-                                    echo $arrayPersonal[$x][1];
-                                echo "</td>"; 
-                                echo "<td>";
-                                    echo $arrayPersonal[$x][2];
-                                echo "</td>";   
-                            echo "</tr>";
-                        }
+                                for ( $x = 0; $x <= $maixmo; $x++) {
+                                    echo "<tr>";
+                                        echo "<td>";
+                                            echo $_SESSION["arrayPersonal"][$x];
+                                        echo "</td>";
+                                        $x++;
+                                        echo "<td>";
+                                            echo $_SESSION["arrayPersonal"][$x];
+                                        echo "</td>";
+                                        $x++; 
+                                        echo "<td>";
+                                            echo $_SESSION["arrayPersonal"][$x];
+                                        echo "</td>";   
+                                    echo "</tr>";
+                                }
                         echo "</table>";    
                     }            
                 ?>           
