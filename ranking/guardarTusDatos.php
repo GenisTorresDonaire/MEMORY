@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,6 +27,8 @@
                     $NombreUsuario = $_POST['NombreUsuario'];
                     $intentos = $_POST['intentos']; 
                     
+                    $_SESSION["user"] = $NombreUsuario;
+
                     // GENERO UNA VARIABLE CON TODOS LOS DATOS PARA INTRODUCIR
                     $arrayDatos[$NombreUsuario] = $intentos;
                     asort($arrayDatos);
@@ -66,11 +72,15 @@
                                     while(!feof($file)){ 
                                         echo "<tr>";
                                             echo "<td>";
+                                            if (fgets($file) == 'Ashly'){
+
                                                 echo "".fgets($file)."";
-                                            echo "</td>";
-                                            echo "<td>";
-                                                echo "".fgets($file)."";
-                                            echo "</td>";
+                                                echo "</td>";
+                                                echo "<td>";
+                                                    echo "".fgets($file)."";
+                                                echo "</td>";
+                                                
+                                            }
                                         echo "</tr>";
                                     }
                                     fclose($file);

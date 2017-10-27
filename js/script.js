@@ -107,12 +107,10 @@ function ayuda(totalCartas){
     // FOR PARA RECORRER TODAS LAS CARTAS EN BUSCA DE LAS DEL REVES PARA MOSTRAR
     if (contadorAyudasPedidas < 3 ){
         contadorAyudasPedidas++;
-        
-        alert(totalCartas);
 
         for (var idC = 0; idC < totalCartas; idC++){
             var classeCarta = document.getElementById("carta"+idC).className;
-            alert(classeCarta);
+            
             // SI AUN NO ESTABA GIRADA ...
             if ( classeCarta == "carta"){
                 ponerDeFrente(idC);
