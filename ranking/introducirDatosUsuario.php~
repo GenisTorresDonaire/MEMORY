@@ -16,20 +16,23 @@
             </header>
             
             <article>
+              
                <div class="tableRegistro">
                   <div class="tableInternoRegistro">
-                        <h1 style="margin-top: 20px">FELICIDADES HAS GANADO!!</h1>
+                    <h1 style="margin-top: 20px">FELICIDADES HAS GANADO!!</h1>
+                    <br>
+                    <form action="../ranking/guardarTusDatos.php" method="post">
+                        <p>Bienvenido al menu de registro de tus datos. Aqui podras registrar tus datos y ver el ranking.</p>
                         <br>
-                        <form action="../ranking/guardarTusDatos.php" method="post">
-                            <p>Bienvenido al menu de registro de tus datos. Aqui podras registrar tus datos y ver el ranking.</p>
-                            <br>
-                            <p>Nombre: <input type="text" name="NombreUsuario"/></p>
-                            <br>
-                            <button type="submit" class="enviarDatosUsuario">Enviar</button> 
+                        <p>Nombre: <input type="text" name="NombreUsuario"/></p>
+                        <br>
+                        <p>Intentos: <input style="text-align: center;" name="intentos" value=<?php echo $_POST["postIntentos"] ?> readonly></p>
+                        <br>
+                        <p><button type="submit" class="enviarDatosUsuario">Enviar</button></p>
                     </form>   
                   </div>
                </div>
-                
+               
             </article>
             
             <footer>

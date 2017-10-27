@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  unset($_SESSION["partida"]);
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,14 +15,11 @@
 	
 	<body>
         <div class="contenedor">
-            
             <header>
-               <h1>Memory</h1>
+                
             </header>
-            
             <article>
                <div class="divInicio">
-                   <h1 style="text-align: center;">Bienvenido al TEXAS MEMORY</h1>
                    <br>
                    <h3>Mecánica del juego</h3>
                    <br>
@@ -31,7 +33,14 @@
                    <br>
                     <div class="tableInternoRegistro">
                         <form action="php/generartabla.php" method="post">
-                            <button type="submit" class="iniciar">Jugar</button> 
+                            <select name="seleccionTablero">
+                              <option value="2">2x2</option>
+                              <option value="4">4x4</option>
+                              <option value="6">6x6</option>
+                              <option value="8">8x8</option>
+                            </select>
+                            <br>
+                            <input type="submit" class="iniciar">
                         </form>
                     </div>
                 </div>

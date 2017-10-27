@@ -5,51 +5,54 @@
 	font-family: "Bourgeois W00 Medium", "Arial Regular", Arial, sans-serif;
 }
 
-header{
-    margin-right: auto;
-    margin-left: auto;
-    width: 1000px;
-    height: 100px;
-    text-align: center;
-}
-
 body{
     position: static;
-    background-image: url("../imagenes/fondo.jpg");
-    background-size:cover;
-    background-repeat:no-repeat;
-    min-height: 500px;
-    height: auto;
-
+    background-color: #FFCCE5;
 }
 
 .contenedor{
     border-radius: 5px;
+    border: 1px solid cyan;
 	height: 550px;
 	width: 1000px;
+    margin-top: 30px;
 	margin-right: auto;
 	margin-left: auto;
     padding: 8px;
 }
 
+header{
+	background-color: silver;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    color: cyan;
+    height: 50px;
+    padding: 8px;
+    line-height: 50px;
+}
+
 article{
-    border: 4px solid blue;
-    background: white;
+    background-color: silver;
+    border-radius: 5px;
+    border: 1px solid cyan;
+    margin-top: 10px;
     padding: 10px;
-    min-height: 400px;
-    min-width: 90%;
+    min-height: 420px;
     height: auto;
     align-content: center;
 }
 
 footer{
-    border: 4px solid blue;
+    border: 1px solid black;
+    border-radius: 5px;
     text-align: center;
-    background-color: white;
+    background-color: silver;
     margin-top: 10px;
 }
 
 button{
+    border-radius: 5px;
     background-color: rebeccapurple;
     color: white;
     min-height: 40px;
@@ -59,17 +62,14 @@ button{
 }
 
 .table{
-    margin-top: 30px;
 	text-align: center;
-    min-height: 400px;
-    padding-bottom: 30px;
 }
 
 .tablarandom{
 	width: auto;
 	height: auto;
 	margin: 0 auto;
-	line-height: 300px;
+	line-height: 200px;
 	text-align: left;
 }
 
@@ -85,6 +85,7 @@ button{
 }
 
 .divInicio{
+   
     padding-left: 50px;
 	width: auto;
 	height: auto;
@@ -106,27 +107,20 @@ button{
 }
 
 .tablarandom td{
-	width: 85px;
-	height: 125px;
+	width: 80px;
+	height: 120px;
     padding: 5px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.tablarandom img{
-    width: 80px;
-    height: 120px; 
-    border-radius: 8px;
-}
-
-.tablarandom img:hover{
-    border: 2px solid orange;
 }
 
 .iniciar{
     margin-top: 10px;
     width: 100px;
     height: 50px;
+}
+
+img{
+    width: 80px;
+    height: 120px; 
 }
 
 .divranking{
@@ -150,72 +144,6 @@ button{
 
 .tableranking td{
     background-color: orange;
-}
-
-.contenedorMenu{
-    position: relative;
-    float: left;
-    display: inline-block;
-    width: 100%;
-    height: 25px;
-}
-
-.divPausar{
-    border: 2px solid green;
-    position: relative;
-    margin-top: 30px;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    text-align: center;
-    display: none;
-}
-
-.divIntentos{
-    float: left;
-}
-
-.divTiempo{
-    margin-left: 40px;
-    float: left;
-}
-
-.divBotonPausar{
-    float: right;
-    border-radius: 100px;
-}
-
-.divBotonAyuda{
-    float: right;
-    border-radius: 100px;
-}
-
-.divBotonRanking{
-    float: right;
-    border-radius: 100px;
-}
-
-#ranking{ 
-    height: 25px;
-    width: 30px;
-    border-radius: 100px;
-}
-
-#pause{
-    height: 25px;
-    width: 30px;
-    border-radius: 100px;
-}
-
-#ayuda{
-    height: 25px;
-    width: 30px;
-    border-radius: 100px;
-}
-
-#botonPlay{
-    width: 150px;
-    height: 150px;
 }
 
 /*      FLIP    */
@@ -245,11 +173,9 @@ button{
 }
 
 .frente{
-    padding: 0px;
     transform: rotateY(0deg);
 }
 
 .atras{
-    padding: 0px;
     transform: rotateY(180deg);
 }
