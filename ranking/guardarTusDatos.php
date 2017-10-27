@@ -34,24 +34,11 @@
                     $arrayGeneral["intentos"] = $intentos;
                     $arrayGeneral["tiempo"] = $tiempo;
                     registrarDatos($arrayGeneral);
-
                     
                     // Añadiendo en personal todos los usuarios que entren en SESSION
-                    $arrayPersonal["nombre"] = $NombreUsuario;
-                    $arrayPersonal["intentos"] = $intentos;
-                    $arrayPersonal["tiempo"] = $tiempo;
+                    array_push($arrayPersonal, $NombreUsuario, $intentos, $tiempo);
                     $_SESSION["arrayPersonal"] = $arrayPersonal;
                     
-
-                    /*
-                    foreach($arrayPersonal as $key=>$value) {
-                        print($value);
-                        print("\t");    
-                    }
-        
-                    print_r($arrayPersonal);
-                    */
-
                     function registrarDatos($arrayGeneral){
                         foreach($arrayGeneral as $key=>$value) {
                             $file = fopen("datos.txt","a");
@@ -100,7 +87,6 @@
 
                         echo "<table class='tablerankingPersonal'>";
                                 echo "<h1>RANKING PERSONAL</h1>";
-
                                 echo "<tr>";
                                     echo "<td>";
                                         echo "Nombre";
@@ -113,41 +99,29 @@
                                     echo "</td>";
                                 echo "</tr>";
 
-                                /*
-                                foreach($_SESSION["arrayPersonal"] as $key => $value) {
-                                    echo "<tr>";
-                                        echo "<td>";
-                                            echo $value;
-                                        echo "</td>";  
-                                    echo "</tr>";
-                                }
-                                */
-                                var_dump($arrayPersonal);
+                        print(sizeof($arrayPersonal));
 
-                                for ($x = 0; $x < count($arrayPersonal); $x++){
-                                    echo "<tr>";
-                                        echo "<td>";
-                                            echo $arrayPersonal[$x][0];
-                                        echo "</td>";
-                                        echo "<td>";
-                                            echo $arrayPersonal[$x][1];
-                                        echo "</td>";
-                                        echo "<td>";
-                                            echo $arrayPersonal[$x][2];
-                                        echo "</td>";
-                                    echo "</tr>";
-                                }   
+                        for ( $x = 0; $x < count($arrayPersonal); $x++) {
+                            echo "<tr>";
+                                echo "<td>";
+                                    echo $arrayPersonal[$x][0];
+                                echo "</td>";
+                                echo "<td>";
+                                    echo $arrayPersonal[$x][1];
+                                echo "</td>"; 
+                                echo "<td>";
+                                    echo $arrayPersonal[$x][2];
+                                echo "</td>";   
+                            echo "</tr>";
+                        }
                         echo "</table>";    
-                    }
-                    
-                ?>
-               
+                    }            
+                ?>           
             </article>
             
             <footer>
                 <h6>Copyright © 2017 Genis, Proyecto MEMORY.</h6>
             </footer>
-
 		</div>
 	</body>
 </html>
