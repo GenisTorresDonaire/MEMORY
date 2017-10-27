@@ -18,7 +18,8 @@
            	<article>
                 <audio id="acierto" src="../imagenes/acierto.mp3"></audio>
                 <audio id="fallo" src="../imagenes/fallo.mp3"></audio>
-				
+				<audio id="seleccionCarta" src="../imagenes/seleccionCarta.mp3"></audio>
+
 				<?php
 					
 					$arrayClonada = array();
@@ -39,15 +40,15 @@
 					}									
    
 					//CREACION DE ARRAY CON NUMEROS REPETIDOS, SOLO 2
-					$lista = array();	// El array ha sido modificado a ArrayObject para poder utilizar el getArrayCopy
+					$lista = array();	
 					$totalnum = ($Filas * $Columnas / 2);
 					
-					$totalCartas = sizeof($_SESSION['partida']);
+					$totalCartas = $totalnum * 2;
 
 					//unset($_SESSION["partida"]);
 
 					// ESTE ISSET ES PARA COMPROBAR SI YA FUE CREADA LA PARTIDA, SINO GENERARA LA LISTA OTRA VEZ.
-					if(!isset($_SESSION['partida'])){
+					if(!isset($_SESSION['partida']) || empty($_SESSION['partida']) ){
 						// GENERADOR DE NUMEROS PARES ALEATORIOS			
 						for ($x = 0; $x < $totalnum; $x++){
 							array_push($lista, $x);
@@ -80,6 +81,7 @@
                     // FORM OCULTO PARA ENVIAR EL CONTADOR DE INTENTOS
 					echo "<form action='../ranking/introducirDatosUsuario.php' id='formularioOculto' method='post'>";
 						echo "<input type='hidden' id='intentosOcultos' name='postIntentos' value='0' />";
+                        echo "<input type='hidden' id='tiempoOculto' name='postTiempo' value='0' />";
 					echo "</form>";
 
 					echo "<div class='table'>";

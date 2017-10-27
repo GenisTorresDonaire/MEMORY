@@ -26,6 +26,8 @@
                         <br></br>
                         <p>Intentos: <input style="text-align: center; border: 1px solid black;" name="intentos" value='<?php echo $_POST["postIntentos"] ?>'  readonly/></p>
                         <br></br>
+                        <p>Tiempos: <input style="text-align: center; border: 1px solid black;" name="tiempo" value='<?php echo $_POST["postTiempo"] ?>'  readonly/></p>
+                        <br></br>
                         <p><button type="submit" class="enviarDatosUsuario">Enviar</button></p>
                     </form>   
                   </div>

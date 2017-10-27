@@ -6,6 +6,14 @@ var contador;
 var contadorAyudasPedidas = 0;
 var cronometro;
 var pausa = false;
+var contMin;
+var contSeg;
+
+function registrarTiempo(){
+    var minutosFinal= document.getElementById("minutos").innerHTML;
+    var segundosFinal= document.getElementById("segundos").innerHTML;   
+    document.getElementById("tiempoOculto").setAttribute("value",minutosFinal+":"+segundosFinal);
+}
 
 function pausar(){
     if (pausa == false){
@@ -23,6 +31,9 @@ function quitarStyle(id){
 }
 
 function ejecutarSubmit(){
+    contMin = 0;
+    contSeg = 0;
+    registrarTiempo();
     var form = document.getElementById("formularioOculto");
     form.submit();
 }
@@ -58,8 +69,13 @@ function detenerse(){
 }
 
 function carga(){
-    contMin = 0;
-    contSeg = 0;
+    if (contMin == null){
+        contMin = 0;
+    }
+    if (contSeg == null){
+        contSeg = 0;
+    }
+    
     etiquetaMinutos = document.getElementById("minutos");
     etiquetaSegundos = document.getElementById("segundos");
 
@@ -74,7 +90,6 @@ function carga(){
                 else{
                     etiquetaMinutos.innerHTML= contMin;
                 }
-
                 if( contMin == 0 ){
                     contMin = 0;
                 } 
@@ -82,7 +97,7 @@ function carga(){
             contSeg++;
 
             if ( contSeg < 10 ){
-                etiquetaSegundos.innerHTML = "0"+contSeg; 
+                etiquetaSegundos.innerHTML = "0" + contSeg; 
             }
             else{
                 etiquetaSegundos.innerHTML = contSeg; 
@@ -101,7 +116,10 @@ function sonidoFallo(){
     fallo.play();
 }
 
-//////////////////////////////////////////////////////// FALTA SONIDO GIRAR CARTA ///////////////////////////////////////
+function sonidoSeleccion(){
+    var seleccion = document.getElementById("seleccionCarta");
+    seleccion.play();
+}
 
 function ayuda(totalCartas){
     // FOR PARA RECORRER TODAS LAS CARTAS EN BUSCA DE LAS DEL REVES PARA MOSTRAR
@@ -143,7 +161,7 @@ function ayuda(totalCartas){
 function empezar(id,parejas){
     if (pausa == false){
         saberTotalParejas(parejas);
-    
+        sonidoSeleccion();
         // Capturar el tipo de clase de la carta seleccionada. Es decir si ha sido girada o no.
         var claseCartaSeleccionada = document.getElementById("carta"+id).className;
         
@@ -197,6 +215,7 @@ function empezar(id,parejas){
                     
                     // Hora de comparar si se han encontrado todas.
                     if(parejasEncontradas == totalParejas){
+                        pausar();
                         setTimeout(function(){ejecutarSubmit();}, 2000);
                     }
                     
