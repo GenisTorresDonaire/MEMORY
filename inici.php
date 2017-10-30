@@ -1,10 +1,6 @@
 <?php
   session_start();
-<<<<<<< HEAD:inici.php
-  //unset($_SESSION["partida"]);
-=======
   unset($_SESSION["partida"]);
->>>>>>> 4d9d958944900878692f9e4c611f46952a9ccc89:inici.php
 ?>
 
 <!DOCTYPE html>
