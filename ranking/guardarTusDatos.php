@@ -39,8 +39,9 @@
                     registrarDatos($arrayGeneral);
                     
                     // Añadiendo en personal todos los usuarios que entren en SESSION
-                    
-                    array_push($arrayPersonal, $NombreUsuario, $intentos, $tiempo);
+                    $arrayPorUsuario = array();
+                    array_push($arrayPorUsuario, $NombreUsuario, $intentos, $tiempo);
+	                array_push($arrayPersonal, $arrayPorUsuario);
                     $_SESSION["arrayPersonal"] = $arrayPersonal;
                     
                     function registrarDatos($arrayGeneral){
@@ -104,18 +105,22 @@
 
 	                                $maixmo = sizeof($_SESSION["arrayPersonal"]);
 
-	                                for ( $x = 0; $x <= $maixmo; $x++) {
+	                                for ( $x = 0; $x < $maixmo; $x++) {
 	                                    echo "<tr>";
 	                                        echo "<td>";
 	                                            echo $_SESSION["arrayPersonal"][$x][0];
 	                                        echo "</td>";
-
+	                                        echo "<td>";
+	                                            echo $_SESSION["arrayPersonal"][$x][1];
+	                                        echo "</td>";
+	                                        echo "<td>";
+	                                            echo $_SESSION["arrayPersonal"][$x][2];
+	                                        echo "</td>";
 	                                    echo "</tr>";
 	                                }
+
 	                        echo "</table>";    
 	                       echo "</div>";
-
-	                       print_r($_SESSION["arrayPersonal"]);
                     }            
                 ?>           
             </article>
