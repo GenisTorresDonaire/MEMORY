@@ -21,6 +21,7 @@
 				<?php
                     $arrayGeneral = array();
 
+                    // Controlar si la array ya es creada para mantenerla o remplazar
                     if(!isset($_SESSION["arrayPersonal"])){
                     	$_SESSION["arrayPersonal"] = array();
                     }
@@ -33,14 +34,15 @@
                     $tiempo = $_POST['tiempo']; 
                     
                     // Añadiendo en general todos los datos de las partidas
-                    $arrayGeneral["nombre"] = $NombreUsuario;
                     $arrayGeneral["intentos"] = $intentos;
                     $arrayGeneral["tiempo"] = $tiempo;
+                    $arrayGeneral["nombre"] = $NombreUsuario;
+                                       
                     registrarDatos($arrayGeneral);
                     
                     // Añadiendo en personal todos los usuarios que entren en SESSION
                     $arrayPorUsuario = array();
-                    array_push($arrayPorUsuario, $NombreUsuario, $intentos, $tiempo);
+                    array_push($arrayPorUsuario, $intentos, $tiempo, $NombreUsuario);
 	                array_push($arrayPersonal, $arrayPorUsuario);
                     $_SESSION["arrayPersonal"] = $arrayPersonal;
                     
