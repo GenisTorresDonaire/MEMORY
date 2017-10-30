@@ -34,10 +34,10 @@
                     $tiempo = $_POST['tiempo']; 
                     
                     // Añadiendo en general todos los datos de las partidas
-                    $arrayGeneral["intentos"] = $intentos;
-                    $arrayGeneral["tiempo"] = $tiempo;
-                    $arrayGeneral["nombre"] = $NombreUsuario;
-                                       
+                    $arrayGeneralUsuario = array();
+                    array_push($arrayGeneralUsuario, $intentos, $tiempo, $NombreUsuario);
+                    array_push($arrayGeneral, $arrayGeneralUsuario);
+                    
                     registrarDatos($arrayGeneral);
                     
                     // Añadiendo en personal todos los usuarios que entren en SESSION
@@ -47,9 +47,11 @@
                     $_SESSION["arrayPersonal"] = $arrayPersonal;
                     
                     function registrarDatos($arrayGeneral){
-                        foreach($arrayGeneral as $key=>$value) {
+                        for ($o = 0; $o < count($arrayGeneral); $o++) {
                             $file = fopen("datos.txt","a");
-                            fputs($file,"$value"."\n");
+                            fputs($file, "".$arrayGeneral[$o][0]."\n");
+                            fputs($file, "".$arrayGeneral[$o][1]."\n");
+                            fputs($file, "".$arrayGeneral[$o][2]."\n");
                             fclose($file);
                         }
                     }
@@ -62,14 +64,14 @@
                                     echo "<h1>RANKING GENERAL</h1>";
                                     echo "<tr>";
 	                                    echo "<td>";
-	                                        echo "<b>Nombre</b>";
-	                                    echo "</td>";
-	                                    echo "<td>";
-	                                        echo "<b>Intentos</b>";
-	                                    echo "</td>";
-	                                    echo "<td>";
-	                                        echo "<b>Tiempo</b>";
-	                                    echo "</td>";
+                                            echo "<b>Intentos</b>";
+                                        echo "</td>";
+                                        echo "<td>";
+                                            echo "<b>Tiempo</b>";
+                                        echo "</td>";
+                                        echo "<td>";
+                                            echo "<b>Nombre</b>";
+                                        echo "</td>";
 	                                echo "</tr>";
 
                                     $file = fopen("datos.txt", "r");
@@ -94,14 +96,14 @@
 	                        echo "<table class='tablerankingPersonal'>";
 	                                echo "<h1>RANKING PERSONAL</h1>";
 	                                echo "<tr>";
+                                        echo "<td>";
+                                            echo "<b>Intentos</b>";
+                                        echo "</td>";
+                                        echo "<td>";
+                                            echo "<b>Tiempo</b>";
+                                        echo "</td>";
 	                                    echo "<td>";
 	                                        echo "<b>Nombre</b>";
-	                                    echo "</td>";
-	                                    echo "<td>";
-	                                        echo "<b>Intentos</b>";
-	                                    echo "</td>";
-	                                    echo "<td>";
-	                                        echo "<b>Tiempo</b>";
 	                                    echo "</td>";
 	                                echo "</tr>";
 

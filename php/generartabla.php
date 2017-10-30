@@ -45,8 +45,6 @@
 					
 					$totalCartas = $totalnum * 2;
 
-					//unset($_SESSION["partida"]);
-
 					// ESTE ISSET ES PARA COMPROBAR SI YA FUE CREADA LA PARTIDA, SINO GENERARA LA LISTA OTRA VEZ.
 					if(!isset($_SESSION['partida']) || empty($_SESSION['partida']) ){
 						// GENERADOR DE NUMEROS PARES ALEATORIOS			
