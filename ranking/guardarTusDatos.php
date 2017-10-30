@@ -14,15 +14,18 @@
 	
 	<body>
         <div class="contenedor">
-            
             <header>
-               
             </header>
             
             <article>
 				<?php
                     $arrayGeneral = array();
-                    $arrayPersonal = $_SESSION["arrayPersonal"];
+
+                    if(!isset($_SESSION["arrayPersonal"])){
+                    	$_SESSION["arrayPersonal"] = array();
+                    }
+					
+					$arrayPersonal = $_SESSION["arrayPersonal"];
 
                     // CAPTURO LA VARIABLE DEL NOMBRE Y INTENTOS
                     $NombreUsuario = $_POST['NombreUsuario'];
@@ -36,6 +39,7 @@
                     registrarDatos($arrayGeneral);
                     
                     // Añadiendo en personal todos los usuarios que entren en SESSION
+                    
                     array_push($arrayPersonal, $NombreUsuario, $intentos, $tiempo);
                     $_SESSION["arrayPersonal"] = $arrayPersonal;
                     
@@ -54,16 +58,16 @@
                             echo "<table class='tablerankingGeneral'>";
                                     echo "<h1>RANKING GENERAL</h1>";
                                     echo "<tr>";
-                                            echo "<td>";
-                                                echo "Nombre";
-                                            echo "</td>";
-                                            echo "<td>";
-                                                echo "Intentos";
-                                            echo "</td>";
-                                            echo "<td>";
-                                                echo "Tiempo";
-                                            echo "</td>";
-                                    echo "</tr>";
+	                                    echo "<td>";
+	                                        echo "<b>Nombre</b>";
+	                                    echo "</td>";
+	                                    echo "<td>";
+	                                        echo "<b>Intentos</b>";
+	                                    echo "</td>";
+	                                    echo "<td>";
+	                                        echo "<b>Tiempo</b>";
+	                                    echo "</td>";
+	                                echo "</tr>";
 
                                     $file = fopen("datos.txt", "r");
                                     while(!feof($file)){ 
@@ -82,41 +86,36 @@
                                     fclose($file);
                             echo "</table>";
                         echo "</div>"; 
+						
+						echo "<div class='divrankingPersonal'>";
+	                        echo "<table class='tablerankingPersonal'>";
+	                                echo "<h1>RANKING PERSONAL</h1>";
+	                                echo "<tr>";
+	                                    echo "<td>";
+	                                        echo "<b>Nombre</b>";
+	                                    echo "</td>";
+	                                    echo "<td>";
+	                                        echo "<b>Intentos</b>";
+	                                    echo "</td>";
+	                                    echo "<td>";
+	                                        echo "<b>Tiempo</b>";
+	                                    echo "</td>";
+	                                echo "</tr>";
 
-                        echo "<br></br>";
+	                                $maixmo = sizeof($_SESSION["arrayPersonal"]);
 
-                        echo "<table class='tablerankingPersonal'>";
-                                echo "<h1>RANKING PERSONAL</h1>";
-                                echo "<tr>";
-                                    echo "<td>";
-                                        echo "Nombre";
-                                    echo "</td>";
-                                    echo "<td>";
-                                        echo "Intentos";
-                                    echo "</td>";
-                                    echo "<td>";
-                                        echo "Tiempo";
-                                    echo "</td>";
-                                echo "</tr>";
+	                                for ( $x = 0; $x <= $maixmo; $x++) {
+	                                    echo "<tr>";
+	                                        echo "<td>";
+	                                            echo $_SESSION["arrayPersonal"][$x][0];
+	                                        echo "</td>";
 
-                                $maixmo = sizeof($_SESSION["arrayPersonal"]);
+	                                    echo "</tr>";
+	                                }
+	                        echo "</table>";    
+	                       echo "</div>";
 
-                                for ( $x = 0; $x <= $maixmo; $x++) {
-                                    echo "<tr>";
-                                        echo "<td>";
-                                            echo $_SESSION["arrayPersonal"][$x];
-                                        echo "</td>";
-                                        $x++;
-                                        echo "<td>";
-                                            echo $_SESSION["arrayPersonal"][$x];
-                                        echo "</td>";
-                                        $x++; 
-                                        echo "<td>";
-                                            echo $_SESSION["arrayPersonal"][$x];
-                                        echo "</td>";   
-                                    echo "</tr>";
-                                }
-                        echo "</table>";    
+	                       print_r($_SESSION["arrayPersonal"]);
                     }            
                 ?>           
             </article>

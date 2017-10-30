@@ -130,26 +130,57 @@ button{
 }
 
 .divranking{
-    width: auto;
-	height: auto;
-	margin: 0 auto;
-	text-align: left;
+    width: 400px;
+    height: 400px;
+    text-align: left;
+    display: inline-block;
+    float: left;
+    overflow: scroll;
 }
 
-.tableranking{
-    background-color: red;
-    width: auto;
-	height: auto;
-	margin: 0 auto;
-	text-align: left;
+.divrankingPersonal{
+    width: 400px;
+    height: 400px;
+    text-align: left;
+    display: inline-block;
+    float: left;
+    margin-left: 30px;
+    overflow: scroll;
 }
 
-.tableranking tr{
-    background-color: green;
+.divranking h1{
+    text-align: center;
 }
 
-.tableranking td{
-    background-color: orange;
+.tablerankingPersonal{
+    text-align: left;
+    width: 100%;
+}
+
+.tablerankingPersonal tr{
+    text-align: center;
+}
+
+.tablerankingPersonal td{
+    text-align: center;
+}
+
+.tablerankingGeneral{
+	text-align: center;
+    width: 100%;
+}
+
+.divrankingPersonal h1{
+    text-align: center;
+}
+
+
+.tablerankingGeneral tr{
+    text-align: center;
+}
+
+.tablerankingGeneral td{
+    text-align: center;
 }
 
 .contenedorMenu{
