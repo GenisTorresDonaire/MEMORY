@@ -25,7 +25,6 @@ body{
 
 .contenedor{
     border-radius: 5px;
-	height: 550px;
 	width: 1000px;
 	margin-right: auto;
 	margin-left: auto;
@@ -38,7 +37,7 @@ article{
     padding: 10px;
     min-height: 400px;
     min-width: 90%;
-    height: 400px;
+    height: auto;
     align-content: center;
 }
 
@@ -62,7 +61,7 @@ button{
     margin-top: 30px;
 	text-align: center;
     min-height: 400px;
-    height: 500px;
+    padding-bottom: 20px;
 }
 
 .tablarandom{
